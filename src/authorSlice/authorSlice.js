@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialValue = {
+const initialState = {
   authors: [],
 };
 
 const authorSlice = createSlice({
   name: "authors",
-  initialValue,
+  initialState,
   reducers: {
-    addNewAuthor: (state, action) => {
+    addNewAuthor: (state = {}, action) => {
       state.authors.push(action.payload);
     },
   },
