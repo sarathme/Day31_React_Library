@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function NavBar() {
   return (
     <header className="full-width grid-container bg-accent">
@@ -5,10 +7,10 @@ function NavBar() {
         <h1>React Library</h1>
         <ul role="list" className="mobile-hidden-btn">
           <li>
-            <a href="#">Add New Book</a>
+            <Link to="books/create">Add New Book</Link>
           </li>
           <li>
-            <a href="#">Add New Author</a>
+            <Link to="authors/create">Add New Author</Link>
           </li>
         </ul>
       </nav>

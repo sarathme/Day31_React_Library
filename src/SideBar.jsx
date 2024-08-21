@@ -1,12 +1,14 @@
+import { NavLink } from "react-router-dom";
+
 function SideBar() {
   return (
     <aside className="sidebar mobile-hidden">
       <ul role="list">
         <li>
-          <a href="#">Books</a>
+          <NavLink to="books">Books</NavLink>
         </li>
         <li>
-          <a href="#">Authors</a>
+          <NavLink to="authors">Authors</NavLink>
         </li>
       </ul>
     </aside>

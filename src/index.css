@@ -159,18 +159,20 @@ body {
   padding: 0;
 }
 
-.sidebar > ul a {
+.sidebar > ul a:link,
+.sidebar > ul a:visited {
   text-decoration: none;
   display: inline-block;
   padding: 0.65em;
   font-size: 1.2rem;
   font-weight: 700;
-
+  color: var(--clr-bg-body);
   width: 100%;
   transition: background-color 200ms ease-in;
 }
 
-.sidebar > ul a:hover {
+.sidebar > ul a:hover,
+.sidebar > ul a.active {
   background-color: var(--clr-bg-body);
   color: var(--clr-accent-400);
 }

@@ -1,9 +1,5 @@
-function ContentArea({ title }) {
-  return (
-    <div className="content-area">
-      <h1>{title}</h1>
-    </div>
-  );
+function ContentArea({ children }) {
+  return <div className="content-area">{children}</div>;
 }
 
 export default ContentArea;
