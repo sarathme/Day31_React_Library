@@ -1,16 +1,76 @@
 import AppLayout from "./AppLayout";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
+import CardList from "./ui/CardList";
+import BookCard from "./ui/BookCard";
+import { useSelector } from "react-redux";
+import AuthorForm from "./authors/AuthorForm";
 
 function App() {
+  const { books, authors } = useSelector((state) => state);
+
+  const booksData = books.books;
+  const authorsData = authors.authors;
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route path="books" element={<h1>Books</h1>} />
-          <Route path="authors" element={<h1>Authors</h1>} />
-          <Route path="authors/create" element={<h1>Create New Author</h1>} />
-          <Route path="books/create" element={<h1>Create New Book</h1>} />
-          <Route path="authors/edit" element={<h1>Edit Author</h1>} />
+          <Route index element={<Navigate to="books" />} />
+          <Route
+            path="books"
+            element={
+              <CardList
+                title="Books"
+                data={booksData}
+                render={(book) => <BookCard key={book.id} />}
+              />
+            }
+          />
+
+          <Route
+            path="authors"
+            element={
+              <CardList
+                title="Authors"
+                data={authorsData}
+                render={(author) => <BookCard key={author.id} />}
+              />
+            }
+          />
+
+          <Route
+            path="authors/create"
+            element={
+              <CardList
+                data={null}
+                title="Add New Author"
+                render={<AuthorForm />}
+              />
+            }
+          />
+
+          <Route
+            path="books/create"
+            element={
+              <CardList
+                data={null}
+                title="Add new Book"
+                render={<AuthorForm />}
+              />
+            }
+          />
+
+          <Route
+            path="authors/edit"
+            element={
+              <CardList
+                data={null}
+                title="Edit Author"
+                render={<AuthorForm />}
+              />
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
