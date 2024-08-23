@@ -2,15 +2,15 @@ import AppLayout from "./AppLayout";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import CardList from "./ui/CardList";
-import BookCard from "./ui/BookCard";
+import BookCard from "./books/BookCard";
 import { useSelector } from "react-redux";
 import AuthorForm from "./authors/AuthorForm";
+import BookForm from "./books/BookForm";
+import AuthorCard from "./authors/AuthorCard";
 
 function App() {
-  const { books, authors } = useSelector((state) => state);
-
-  const booksData = books.books;
-  const authorsData = authors.authors;
+  const { books } = useSelector((state) => state.books);
+  const { authors } = useSelector((state) => state.authors);
 
   return (
     <BrowserRouter>
@@ -22,8 +22,8 @@ function App() {
             element={
               <CardList
                 title="Books"
-                data={booksData}
-                render={(book) => <BookCard key={book.id} />}
+                data={books}
+                render={(book) => <BookCard key={book.id} book={book} />}
               />
             }
           />
@@ -33,8 +33,10 @@ function App() {
             element={
               <CardList
                 title="Authors"
-                data={authorsData}
-                render={(author) => <BookCard key={author.id} />}
+                data={authors}
+                render={(author) => (
+                  <AuthorCard key={author.id} author={author} />
+                )}
               />
             }
           />
@@ -56,7 +58,7 @@ function App() {
               <CardList
                 data={null}
                 title="Add new Book"
-                render={<AuthorForm />}
+                render={<BookForm />}
               />
             }
           />

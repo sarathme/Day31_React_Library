@@ -1,18 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
 /* CSS VARIABLES */
 
 :root {
-  --clr-bg-body: hsl(30, 14%, 97%);
+  --clr-bg-body: #eeeeee;
   --clr-primary-400: hsl(30, 16%, 93%);
-  --clr-accent-400: hsl(348, 58%, 48%);
-  --ff: "Josefin Sans";
+  --clr-secondary-400: #508c9b;
+  --clr-accent-400: #800000;
+  --ff: "Oswald", sans-serif;
 }
 
-::selection {
+/* ::selection {
   background: var(--clr-accent-400);
   color: var(--clr-bg-body);
-}
+} */
 
 /* CSS RESET */
 
@@ -111,6 +113,7 @@ textarea:not([rows]) {
 
 body {
   font-family: var(--ff);
+  font-size: 1.5rem;
   background: var(--clr-bg-body);
   padding: 0;
   margin: 0;
@@ -137,24 +140,84 @@ body {
 }
 
 .card-list {
-  padding: 0 5em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 400px));
 }
 
 .card {
+  position: relative;
+
+  font-size: 1.2rem;
   margin-top: 1rem;
   background: var(--clr-bg-body);
   border-radius: 0.5em;
-  padding: 1em;
-  flex-basis: 300px;
-  display: grid;
-  gap: 1rem;
+
   box-shadow: 0 0 2px hsla(0, 0%, 0%, 0.499);
+  overflow: hidden;
+  display: grid;
 }
 
-.card h3 {
-  font-style: italic;
+.card__header > *:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
+.card__header,
+.card__footer,
+.card p {
+  padding: 0.65em;
+}
+
+.card__header {
+  min-height: 10rem;
+  padding-top: 2.8em;
+}
+
+.card__footer h4 {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.card__footer span {
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.card__footer > *:not(:last-child) {
+  margin-bottom: 0.6em;
+}
+
+.card h2 {
+  font-size: 1.6rem;
+}
+
+.bio {
+  min-height: 15rem;
+}
+
+.card .cta {
+  position: absolute;
+  top: 0.6em;
+  right: 0.7em;
+  display: flex;
+  gap: 1rem;
+}
+
+.cta .btn {
+  background-color: transparent;
+  color: #fff;
+  font-size: 1.7rem;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 250ms;
+}
+
+.cta .btn:hover,
+.cta .btn:focus-visible {
+  border: none;
+  outline: none;
+  transform: scale(1.2);
+}
 .grid-container {
   --padding-inline: 1rem;
   --content-max-width: 1440px;
@@ -218,6 +281,7 @@ body {
   color: var(--clr-bg-body);
   width: 100%;
   transition: background-color 200ms ease-in;
+  font-size: 1.6rem;
 }
 
 .sidebar > ul a:hover,
@@ -228,8 +292,10 @@ body {
 
 .content-area {
   background: var(--clr-primary-400);
+  flex-grow: 2;
+  /* flex-shrink: 0; */
   flex-basis: 500px;
-  flex-grow: 3;
+
   padding: 1em;
   height: 100%;
   overflow-y: scroll;
@@ -280,4 +346,93 @@ body {
 
 .footer {
   padding: 1.3em;
+}
+
+.list-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.form {
+  flex: 1;
+  flex-basis: 80%;
+}
+.input-group {
+  display: grid;
+  width: 80%;
+  gap: 0.2rem;
+  margin-bottom: 1.5rem;
+}
+.input-group label {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.2em 0;
+  color: var(--clr-secondary-400);
+}
+
+.input-group label span {
+  font-size: 1.2rem;
+  display: inline-block;
+  padding: 0.5em;
+  color: #f5004f;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  font-size: 1.3rem;
+  height: 3rem;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 2px #000;
+  background-color: #fff;
+}
+
+.input-group input:focus-visible {
+  outline: 2px solid var(--clr-accent-400);
+  outline-offset: 0.2em;
+}
+
+.input-group textarea:focus-visible {
+  outline: 2px solid var(--clr-accent-400);
+  outline-offset: 0.2em;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-group input {
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  background-color: transparent;
+}
+
+.btn-group input:focus-visible.save,
+.btn-group input:hover.save {
+  outline: 4px solid var(--clr-secondary-400);
+  outline-offset: 4px;
+}
+
+.btn-group input:focus-visible.cancel,
+.btn-group input:hover.cancel {
+  outline: 4px solid var(--clr-accent-400);
+  outline-offset: 4px;
+}
+
+.btn-group .cancel {
+  background: var(--clr-accent-400);
+  color: var(--clr-bg-body);
+}
+
+.btn-group .save {
+  background: var(--clr-secondary-400);
+  color: var(--clr-bg-body);
 }
