@@ -4,35 +4,21 @@ const initialState = {
   books: [
     {
       id: 1,
-      title: "Moby-Dick",
-      isbnNumber: 4484,
-      authorIDs: [1],
+      title: "1984",
+      isbnNumber: "978-0451524935",
+      publishedDate: "June 8, 1949",
+      authorIDs: [1, 2, 3],
       description:
-        "The Whale is an 1851 novel by American writer Herman Melville. The book is the sailor Ishmael's narrative of the maniacal quest of Ahab, captain of the whaling ship Pequod, for vengeance against Moby Dick, the giant white sperm whale that bit off his leg on the ship's previous voyage.",
+        "1984 is a dystopian novel set in a totalitarian society controlled by the Party and its leader, Big Brother. The story follows Winston Smith, a man struggling against oppressive government control, surveillance, and propaganda, exploring themes of freedom, truth, and individuality.",
     },
     {
       id: 2,
-      title: "Moby-Dick",
-      isbnNumber: 4484,
+      title: "Animal Farm",
+      isbnNumber: "978-0451526342",
       authorIDs: [1],
+      publishedDate: "August 17, 1945",
       description:
-        "The Whale is an 1851 novel by American writer Herman Melville. The book is the sailor Ishmael's narrative of the maniacal quest of Ahab, captain of the whaling ship Pequod, for vengeance against Moby Dick, the giant white sperm whale that bit off his leg on the ship's previous voyage.",
-    },
-    {
-      id: 3,
-      title: "Moby-Dick",
-      isbnNumber: 4484,
-      authorIDs: [1],
-      description:
-        "The Whale is an 1851 novel by American writer Herman Melville. The book is the sailor Ishmael's narrative of the maniacal quest of Ahab, captain of the whaling ship Pequod, for vengeance against Moby Dick, the giant white sperm whale that bit off his leg on the ship's previous voyage.",
-    },
-    {
-      id: 4,
-      title: "Moby-Dick",
-      isbnNumber: 4484,
-      authorIDs: [1],
-      description:
-        "The Whale is an 1851 novel by American writer Herman Melville. The book is the sailor Ishmael's narrative of the maniacal quest of Ahab, captain of the whaling ship Pequod, for vengeance against Moby Dick, the giant white sperm whale that bit off his leg on the ship's previous voyage.",
+        "Animal Farm is a political allegory that satirizes the Russian Revolution and the rise of Stalinism. The novella tells the story of a group of farm animals who overthrow their human owner and attempt to establish an egalitarian society, only to see it descend into tyranny.",
     },
   ],
 };
