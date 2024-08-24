@@ -247,7 +247,7 @@ body {
   justify-content: flex-start;
   flex-wrap: wrap;
   min-height: 80vh;
-  max-height: 80vh;
+  max-height: 85vh;
 
   /* min-height: 100vh; */
 }
@@ -345,7 +345,7 @@ body {
 }
 
 .footer {
-  padding: 1.3em;
+  padding: 0.6em;
 }
 
 .list-title {
@@ -435,4 +435,100 @@ body {
 .btn-group .save {
   background: var(--clr-secondary-400);
   color: var(--clr-bg-body);
+}
+
+.select-authors {
+  position: relative;
+  background: #fff;
+  box-shadow: 0 0 2px hsla(0, 0%, 0%, 0.499);
+  font-size: 1.3rem;
+  color: grey;
+  min-height: 3rem;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.select-authors:focus-visible {
+  outline: 2px solid var(--clr-accent-400);
+  outline-offset: 0.2em;
+}
+
+.focus-ring {
+  outline: 2px solid var(--clr-accent-400);
+}
+
+.select-authors .options {
+  position: absolute;
+  top: calc(100% + 0.3em);
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  max-height: 15rem;
+  overflow-y: auto;
+  display: none;
+  /* padding: 0 0.5em;  */
+  border-radius: 0.6em;
+  z-index: 3;
+}
+
+.options.show {
+  display: block;
+  border: 1px solid #00000042;
+}
+
+.select-authors .options > li {
+  padding: 0.45em;
+}
+
+.options li:not(:first-child):hover {
+  background-color: var(--clr-accent-400);
+  color: var(--clr-bg-body);
+}
+
+.options li:first-child {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+}
+
+.options li:not(:last-child) {
+  border-bottom: 1px solid hsla(0, 0%, 50%, 0.419);
+}
+
+.options li span {
+  color: var(--clr-accent-400);
+
+  cursor: pointer;
+}
+
+.options li span:hover,
+.options li span:focus-visible {
+  color: var(--clr-secondary-400);
+  text-decoration: underline;
+  outline: none;
+}
+
+.value-badge {
+  background-color: var(--clr-accent-400);
+  display: inline-block;
+  margin: 0 0.25em 0.25em 0;
+  /* padding: 0.25em 0; */
+  color: var(--clr-bg-body);
+  border-radius: 0.6em;
+  padding-left: 0.65em;
+  border: 1px solid var(--clr-accent-400);
+}
+
+.value-badge > span {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  background-color: #fff;
+  color: var(--clr-accent-400);
+  display: inline-block;
+  padding: 0 0.65em;
+  border: 1px solid var(--clr-accent-400);
+  border-radius: 0 0.45em 0.45em 0;
 }

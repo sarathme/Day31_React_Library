@@ -4,7 +4,11 @@ import { useDispatch } from "react-redux";
 import InputGroup from "../ui/InputGroup";
 import generateUniqueId from "generate-unique-id";
 import { useNavigate } from "react-router-dom";
-
+const initialValues = {
+  authorName: "",
+  birthDate: "",
+  shortBio: "",
+};
 const validate = (values) => {
   const errors = {};
 
@@ -22,12 +26,6 @@ const validate = (values) => {
 };
 
 function AuthorForm() {
-  const initialValues = {
-    authorName: "",
-    birthDate: "",
-    shortBio: "",
-  };
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -66,7 +64,6 @@ function AuthorForm() {
         <input
           type="date"
           id="birthDate"
-          placeholder="Author's name"
           value={formik.values.birthDate}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
