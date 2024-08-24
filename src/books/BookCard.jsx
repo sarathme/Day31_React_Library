@@ -16,11 +16,12 @@ function BookCard({ book }) {
     <div className="card">
       <div className="card__header bg-accent">
         <h2>{book.title}</h2>
-        <h4>
-          by {bookAuthors.length > 0 ? bookAuthors.join(", ") : bookAuthors}
-        </h4>
       </div>
-      <p>{book.description}</p>
+      <AuthorBadge authors={bookAuthors} />
+      <p>
+        <h4>Description:</h4>
+        {book.description}
+      </p>
       <div className="card__footer bg-accent">
         <h4>
           ISBN: <span>{book.isbnNumber}</span>
@@ -36,6 +37,17 @@ function BookCard({ book }) {
         <button className="btn">{<HiMiniPencil />}</button>
         <button className="btn">{<HiMiniTrash />}</button>
       </div>
+    </div>
+  );
+}
+
+function AuthorBadge({ authors }) {
+  return (
+    <div className="author-badges">
+      <h4>Author(s)</h4>
+      {authors.map((author) => (
+        <span key={author}>{author}</span>
+      ))}
     </div>
   );
 }

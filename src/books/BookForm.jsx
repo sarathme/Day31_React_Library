@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InputGroup from "../ui/InputGroup";
 import SelectAuthors from "../ui/SelectAuthors";
 import { useState } from "react";
 import { useFormik } from "formik";
 import generateUniqueId from "generate-unique-id";
+import { useNavigate } from "react-router-dom";
+import { addNewBook } from "./bookSlice";
 
 const initialValues = {
   title: "",
@@ -32,6 +34,8 @@ const validate = (values) => {
 };
 
 function BookForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { authors } = useSelector((state) => state.authors);
 
   const [value, setValue] = useState([]);
@@ -47,7 +51,8 @@ function BookForm() {
         id: generateUniqueId(),
       };
 
-      console.log(newBook);
+      dispatch(addNewBook(newBook));
+      navigate("/books");
     },
   });
 
