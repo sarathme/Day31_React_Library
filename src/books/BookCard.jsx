@@ -1,8 +1,12 @@
 import { HiMiniPencil, HiMiniTrash } from "react-icons/hi2";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteBook } from "./bookSlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 function BookCard({ book }) {
   const authors = useSelector((state) => state.authors.authors);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const bookAuthors = authors
     .filter((author) => book.authorIDs.includes(author.id))
@@ -18,10 +22,10 @@ function BookCard({ book }) {
         <h2>{book.title}</h2>
       </div>
       <AuthorBadge authors={bookAuthors} />
-      <p>
+      <div className="description">
         <h4>Description:</h4>
-        {book.description}
-      </p>
+        <p>{book.description}</p>
+      </div>
       <div className="card__footer bg-accent">
         <h4>
           ISBN: <span>{book.isbnNumber}</span>
@@ -34,8 +38,12 @@ function BookCard({ book }) {
         </h4>
       </div>
       <div className="cta">
-        <button className="btn">{<HiMiniPencil />}</button>
-        <button className="btn">{<HiMiniTrash />}</button>
+        <button className="btn" onClick={() => navigate(`edit/${book.id}`)}>
+          {<HiMiniPencil />}
+        </button>
+        <button className="btn" onClick={() => dispatch(deleteBook(book.id))}>
+          {<HiMiniTrash />}
+        </button>
       </div>
     </div>
   );

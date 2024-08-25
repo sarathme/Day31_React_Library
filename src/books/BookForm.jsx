@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import InputGroup from "../ui/InputGroup";
 import SelectAuthors from "../ui/SelectAuthors";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import generateUniqueId from "generate-unique-id";
-import { useNavigate } from "react-router-dom";
-import { addNewBook } from "./bookSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import { addNewBook, updateBook } from "./bookSlice";
 
 const initialValues = {
   title: "",
@@ -14,11 +14,14 @@ const initialValues = {
   description: "",
 };
 
-const validate = (values) => {
+const validateForm = (values, authors) => {
   const errors = {};
 
   if (!values.title.length) {
     errors.title = "Required";
+  }
+  if (!authors.length) {
+    errors.authors = "Please select atleast one author";
   }
   if (!values.publishedDate.length) {
     errors.publishedDate = "Required";
@@ -33,25 +36,61 @@ const validate = (values) => {
   return errors;
 };
 
-function BookForm() {
+function BookForm({ isEdit }) {
+  const [isEditing, setIsEditing] = useState(isEdit);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { authors } = useSelector((state) => state.authors);
+  const { books } = useSelector((state) => state.books);
+  const { bookId } = useParams();
+  const bookData = isEditing
+    ? books.filter((book) => book.id === bookId)
+    : [initialValues];
 
-  const [value, setValue] = useState([]);
-  const [authorSelected, setAuthorSelected] = useState(true);
+  let bookAuthors;
+  if (isEditing) {
+    bookAuthors = authors.filter((author) =>
+      bookData[0]?.authorIDs.includes(author.id)
+    );
+  }
+
+  const [value, setValue] = useState(function () {
+    if (isEdit) {
+      return bookAuthors.map((bookAuthor) => {
+        return { id: bookAuthor.id, authorName: bookAuthor.authorName };
+      });
+    } else {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    setIsEditing(isEdit);
+  }, [isEdit]);
 
   const formik = useFormik({
-    initialValues,
-    validate,
+    initialValues: bookData[0],
+    validate: (values) => {
+      return validateForm(values, value);
+    },
     onSubmit(values) {
-      const newBook = {
-        ...values,
-        authorIDs: value.map((valueObj) => valueObj.id),
-        id: generateUniqueId(),
-      };
+      if (isEditing) {
+        const updatedBook = {
+          ...values,
+          authorIDs: value.map((value) => value.id),
+        };
 
-      dispatch(addNewBook(newBook));
+        dispatch(updateBook(updatedBook));
+      } else {
+        const newBook = {
+          ...values,
+          authorIDs: value.map((value) => value.id),
+          id: generateUniqueId(),
+        };
+        dispatch(addNewBook(newBook));
+      }
+
       navigate("/books");
     },
   });
@@ -69,25 +108,18 @@ function BookForm() {
   }
 
   function removeValue(obj) {
-    setValue((value) => value.filter((valueObj) => valueObj.id !== obj.id));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (value.length === 0) {
-      setAuthorSelected(false);
-    }
-
-    formik.handleSubmit();
+    setValue((value) => {
+      return value.filter((valueObj) => valueObj.id !== obj.id);
+    });
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={formik.handleSubmit}>
       <InputGroup
         label="Select Author(s)"
         labelFor="title"
-        error={!authorSelected}
-        errorMessage={"Please select atleast one author"}>
+        error={formik.errors.authors}
+        errorMessage={formik.errors.authors}>
         <SelectAuthors
           options={authors}
           values={value}
@@ -148,8 +180,17 @@ function BookForm() {
         />
       </InputGroup>
       <div className="btn-group">
-        <input type="button" value="Reset" className="cancel" />
-        <input type="submit" value="Add Book" className="save" />
+        <input
+          type="button"
+          value="Cancel"
+          className="cancel"
+          onClick={() => navigate("/books")}
+        />
+        <input
+          type="submit"
+          value={isEditing ? "Update Book" : "Add Book"}
+          className="save"
+        />
       </div>
     </form>
   );
