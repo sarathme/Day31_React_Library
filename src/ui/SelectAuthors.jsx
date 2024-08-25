@@ -13,7 +13,7 @@ function SelectAuthors({ options, setValues, values, removeValue }) {
         e.stopPropagation();
         setOptionOpen(false);
       }}
-      onClick={(e) => {
+      onClick={() => {
         setOptionOpen((state) => !state);
       }}>
       {values.length === 0 && <span>Select the author of the book</span>}
@@ -21,7 +21,7 @@ function SelectAuthors({ options, setValues, values, removeValue }) {
         values.map((value) => (
           <Values
             key={value.id}
-            value={value.name}
+            value={value.authorName}
             onClick={() => removeValue(value)}
           />
         ))}
@@ -41,7 +41,7 @@ function SelectAuthors({ options, setValues, values, removeValue }) {
           <li
             key={option.id}
             onClick={() =>
-              setValues({ id: option.id, name: option.authorName })
+              setValues({ id: option.id, authorName: option.authorName })
             }>
             {option.authorName}
           </li>

@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
-import { addNewAuthor } from "./authorSlice";
-import { useDispatch } from "react-redux";
+import { addNewAuthor, updateAuthor } from "./authorSlice";
+import { useDispatch, useSelector } from "react-redux";
 import InputGroup from "../ui/InputGroup";
 import generateUniqueId from "generate-unique-id";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 const initialValues = {
   authorName: "",
   birthDate: "",
@@ -25,16 +26,28 @@ const validate = (values) => {
   return errors;
 };
 
-function AuthorForm() {
+function AuthorForm({ isEdit }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { authors } = useSelector((state) => state.authors);
+  const { authorId } = useParams();
+
+  const authorData = isEdit
+    ? authors.filter((author) => author.id === authorId)
+    : [initialValues];
+
   const formik = useFormik({
-    initialValues,
+    initialValues: authorData[0],
     validate,
     onSubmit(values) {
-      const newAuthor = { ...values, id: generateUniqueId() };
-      dispatch(addNewAuthor(newAuthor));
+      if (isEdit) {
+        dispatch(updateAuthor(values));
+      } else {
+        const newAuthor = { ...values, id: generateUniqueId() };
+
+        dispatch(addNewAuthor(newAuthor));
+      }
       navigate("/authors");
     },
   });
@@ -77,18 +90,22 @@ function AuthorForm() {
         <textarea
           id="shortBio"
           placeholder="Write a short bio of the author"
-          onChange={formik.handleChange}>
-          {formik.values.shortBio}
-        </textarea>
+          onChange={formik.handleChange}
+          defaultValue={formik.values.shortBio}
+        />
       </InputGroup>
       <div className="btn-group">
         <input
           type="button"
-          value="Reset"
+          value="Cancel"
           className="cancel"
-          onClick={formik.handleReset}
+          onClick={() => navigate("/authors")}
         />
-        <input type="submit" value="Add Author" className="save" />
+        <input
+          type="submit"
+          value={isEdit ? "Update Author" : "Add Author"}
+          className="save"
+        />
       </div>
     </form>
   );

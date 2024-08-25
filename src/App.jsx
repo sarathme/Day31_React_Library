@@ -47,7 +47,7 @@ function App() {
               <CardList
                 data={null}
                 title="Add New Author"
-                render={<AuthorForm />}
+                render={<AuthorForm key={1} isEdit={false} />}
               />
             }
           />
@@ -58,18 +58,28 @@ function App() {
               <CardList
                 data={null}
                 title="Add new Book"
-                render={<BookForm />}
+                render={<BookForm key={1} isEdit={false} />}
+              />
+            }
+          />
+          <Route
+            path="books/edit/:bookId"
+            element={
+              <CardList
+                data={null}
+                title="Update Book"
+                render={<BookForm isEdit={true} />}
               />
             }
           />
 
           <Route
-            path="authors/edit"
+            path="authors/edit/:authorId"
             element={
               <CardList
                 data={null}
-                title="Edit Author"
-                render={<AuthorForm />}
+                title="Update Author"
+                render={<AuthorForm isEdit={true} />}
               />
             }
           />
