@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import AuthorForm from "./authors/AuthorForm";
 import BookForm from "./books/BookForm";
 import AuthorCard from "./authors/AuthorCard";
+import ConfirmModal from "./ui/ConfirmModal";
 
 function App() {
   const { books } = useSelector((state) => state.books);

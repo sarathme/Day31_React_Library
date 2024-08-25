@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 import ContentArea from "./ContentArea";
+import Footer from "./ui/Footer";
 
 function AppLayout() {
   return (
@@ -14,7 +15,7 @@ function AppLayout() {
           <Outlet />
         </ContentArea>
       </main>
-      <footer className="footer bg-accent full-width">dd</footer>
+      <Footer />
     </>
   );
 }

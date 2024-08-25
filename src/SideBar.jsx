@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function SideBar() {
   return (
-    <aside className="sidebar mobile-hidden">
+    <aside className="sidebar">
       <ul role="list">
         <li>
           <NavLink to="books">Books</NavLink>

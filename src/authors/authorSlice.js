@@ -30,15 +30,15 @@ const authorSlice = createSlice({
   name: "authors",
   initialState,
   reducers: {
-    addNewAuthor: (state = {}, action) => {
+    addNewAuthor: (state, action) => {
       state.authors.push(action.payload);
     },
-    deleteAuthor: (state = {}, action) => {
+    deleteAuthor: (state, action) => {
       state.authors = state.authors.filter(
         (author) => author.id !== action.payload
       );
     },
-    updateAuthor: (state = {}, action) => {
+    updateAuthor: (state, action) => {
       state.authors = state.authors.map((author) => {
         if (author.id === action.payload.id) {
           return action.payload;
