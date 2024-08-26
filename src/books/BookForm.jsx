@@ -15,6 +15,8 @@ const initialValues = {
 };
 
 const validateForm = (values, authors) => {
+  const isbnRegex =
+    /^(?:(?:\d{1,5}-)?(?:\d{1,7}-)?(?:\d{1,6}-)?(?:\d{1,3}-)?(?:\d{9}X|\d{10})|(?:\d{3}-)?(?:\d{1,5}-)?(?:\d{1,7}-)?(?:\d{1,6}-)?(?:\d{1,3}-)?\d{13})$/;
   const errors = {};
 
   if (!values.title.length) {
@@ -31,6 +33,9 @@ const validateForm = (values, authors) => {
   }
   if (!values.isbnNumber.length) {
     errors.isbnNumber = "Required";
+  }
+  if (!isbnRegex.test(values.isbnNumber)) {
+    errors.isbnNumber = "Please provide a valid ISBN Number";
   }
 
   return errors;
