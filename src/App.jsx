@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import AuthorForm from "./authors/AuthorForm";
 import BookForm from "./books/BookForm";
 import AuthorCard from "./authors/AuthorCard";
-import ConfirmModal from "./ui/ConfirmModal";
 
 function App() {
   const { books } = useSelector((state) => state.books);
@@ -16,10 +15,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<Navigate to="books" />} />
+        <Route element={<AppLayout />}>
+          <Route index element={<Navigate to="/books" />} />
           <Route
-            path="books"
+            path="/books"
             element={
               <CardList
                 title="Books"
@@ -30,7 +29,7 @@ function App() {
           />
 
           <Route
-            path="authors"
+            path="/authors"
             element={
               <CardList
                 title="Authors"
@@ -43,7 +42,7 @@ function App() {
           />
 
           <Route
-            path="authors/create"
+            path="/authors/create"
             element={
               <CardList
                 data={null}
@@ -54,7 +53,7 @@ function App() {
           />
 
           <Route
-            path="books/create"
+            path="/books/create"
             element={
               <CardList
                 data={null}
@@ -64,7 +63,7 @@ function App() {
             }
           />
           <Route
-            path="books/edit/:bookId"
+            path="/books/edit/:bookId"
             element={
               <CardList
                 data={null}
@@ -75,7 +74,7 @@ function App() {
           />
 
           <Route
-            path="authors/edit/:authorId"
+            path="/authors/edit/:authorId"
             element={
               <CardList
                 data={null}
