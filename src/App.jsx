@@ -42,7 +42,7 @@ function App() {
           />
 
           <Route
-            path="/authors/create"
+            path="/author/create"
             element={
               <CardList
                 data={null}
@@ -53,7 +53,7 @@ function App() {
           />
 
           <Route
-            path="/books/create"
+            path="/book/create"
             element={
               <CardList
                 data={null}

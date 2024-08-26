@@ -165,6 +165,7 @@ function BookForm({ isEdit }) {
           value={formik.values.isbnNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          placeholder="Input ISBN"
         />
       </InputGroup>
       <InputGroup
@@ -177,6 +178,8 @@ function BookForm({ isEdit }) {
           value={formik.values.description}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          placeholder="Write a short description of the book (150 characters)"
+          maxLength="150"
         />
       </InputGroup>
       <div className="btn-group">

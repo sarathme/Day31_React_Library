@@ -89,9 +89,10 @@ function AuthorForm({ isEdit }) {
         errorMessage={formik.errors.shortBio}>
         <textarea
           id="shortBio"
-          placeholder="Write a short bio of the author"
+          placeholder="Write a short bio of the author (150 characters)"
           onChange={formik.handleChange}
           defaultValue={formik.values.shortBio}
+          maxLength="150"
         />
       </InputGroup>
       <div className="btn-group">

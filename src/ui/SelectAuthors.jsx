@@ -28,13 +28,13 @@ function SelectAuthors({ options, setValues, values, removeValue }) {
 
       <ul className={`options ${optionOpen ? "show" : ""}`} role="list">
         <li>
-          Author Not Listed?{" "}
+          {!options.length ? "No Author found " : "Author Not Listed?"}
           <span
             onClick={(e) => {
               e.stopPropagation();
-              navigate("/authors/create");
+              navigate("/author/create");
             }}>
-            Create One
+            Add New
           </span>
         </li>
         {options.map((option) => (

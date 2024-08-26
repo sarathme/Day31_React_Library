@@ -10,7 +10,7 @@ function BookCard({ book }) {
   const authors = useSelector((state) => state.authors.authors);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  console.log(book);
   const bookAuthors = authors
     .filter((author) => book.authorIDs.includes(author.id))
     .map((author) => author.authorName);

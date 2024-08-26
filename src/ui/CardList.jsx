@@ -2,6 +2,8 @@ import AddButton from "./AddButton";
 import EmptyData from "./EmptyData";
 
 function CardList({ data, render, title }) {
+  const redirect = title.slice(0, title.length - 1).toLowerCase();
+
   return (
     <>
       <div className="card-list__header">
@@ -13,7 +15,7 @@ function CardList({ data, render, title }) {
           <EmptyData
             message={`No ${title} available`}
             redirectText={`Add New ${title}`}
-            redirectLink={`/${title}/create`}
+            redirectLink={`/${redirect}/create`}
           />
         )}
         {data !== null && data.map(render)}

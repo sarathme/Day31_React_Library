@@ -14,6 +14,7 @@ function AuthorCard({ author }) {
   const navigate = useNavigate();
   const { books } = useSelector((state) => state.books);
 
+  console.log(books);
   const booksOfAuthor = books.filter((book) =>
     book.authorIDs.includes(author.id)
   );

@@ -7,11 +7,11 @@ function AddButton() {
   const options = [
     {
       text: "Add New Author",
-      redirectLink: "/authors/create",
+      redirectLink: "/author/create",
     },
     {
       text: "Add New Books",
-      redirectLink: "/books/create",
+      redirectLink: "/book/create",
     },
   ];
 
